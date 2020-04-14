@@ -12,16 +12,17 @@ const App = () => {
   useEffect(() => {
     if (number !== "") {
       const newData = data.slice(0, number);
-      if (number <= 4 && number < data.length) {
-        setItemWidth(48.5);
-      } else if (number >= 5) {
-        setItemWidth(23.5);
-      }
+      // if (number <= 4 && number < data.length) {
+      //   setItemWidth(48.5);
+      // } else if (number >= 5) {
+      //   setItemWidth(23.5);
+      // }
+      setItemWidth(30);
       setDataSlice(newData);
     }
   }, [number]);
 
-  const onChangeNumber = e => {
+  const onChangeNumber = (e) => {
     const { value } = e.target;
     setNumber(value);
   };
@@ -81,10 +82,11 @@ const BoxStyled = styled.div`
 `;
 
 const CardStyled = styled.div`
+  width: ${(props) => props.itemWidth}%;
+
   position: relative;
   border: 1px solid #525151;
-  width: ${props => props.itemWidth}%;
-  margin: 0.7%;
+  margin: 7%;
 
   &:hover button {
     display: block;
@@ -97,10 +99,14 @@ const DateStyled = styled.div`
 
 const GridStyled = styled.div`
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  &::after {
-    content: "";
-    flex: auto;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+  > * {
+    flex: 0 0 32%;
+    margin: 1% 0;
+  }
+  > :nth-child(3n-1) {
+    margin-left: 2%;
+    margin-right: 2%;
   }
 `;
